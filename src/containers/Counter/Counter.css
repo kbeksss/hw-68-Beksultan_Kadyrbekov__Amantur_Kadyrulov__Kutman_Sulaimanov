@@ -1,0 +1,34 @@
+.Counter{
+    max-width: 1000px;
+    margin: 20px auto;
+}
+.Count{
+    width: 100px;
+    height: 50px;
+    background: aqua;
+    border-radius: 10px;
+    border: 1px solid;
+    text-align: center;
+    line-height: 44px;
+    font-size: 22px;
+    margin: 0 auto;
+}
+.All-btns{
+    margin: 30px auto 0;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-around;
+}
+.All-btns button{
+    width: 100px;
+    height: 30px;
+    background: #009898;
+    border-radius: 10px;
+    border: 1px solid #00ffff;
+    color: #fff;
+    outline: none;
+}
+.All-btns button:hover{
+    color: #000;
+    background: aqua;
+}

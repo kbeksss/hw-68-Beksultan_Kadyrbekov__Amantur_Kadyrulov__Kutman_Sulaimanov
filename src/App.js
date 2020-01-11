@@ -1,9 +1,13 @@
 import React, {Fragment} from 'react';
+import Counter from "./containers/Counter/Counter";
+import {Route, Switch} from "react-router";
 
 const App = () => {
     return (
         <Fragment>
-            just checking
+            <Switch>
+                <Route path='/' component={Counter}/>
+            </Switch>
         </Fragment>
     );
 };

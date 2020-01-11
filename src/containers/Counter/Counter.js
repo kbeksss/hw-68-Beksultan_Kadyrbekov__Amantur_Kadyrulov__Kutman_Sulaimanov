@@ -1,0 +1,49 @@
+import React, {Component} from 'react';
+import './Counter.css';
+import {connect} from 'react-redux';
+import {
+    addToCount,
+    decreaseCount,
+    fetchCounter,
+    increaseCount,
+    subtractFromCount
+} from "../../store/action";
+
+class Counter extends Component{
+    componentDidMount() {
+        this.props.fetchCounter();
+    }
+
+    render() {
+        return (
+            <div className='Counter'>
+                <div className='Count'>{this.props.countState}</div>
+                <div className='All-btns'>
+                    <button onClick={this.props.increase}>INCREASE</button>
+                    <button onClick={this.props.decrease}>DECREASE</button>
+                    <button onClick={() => this.props.add(5)}>ADD 5</button>
+                    <button onClick={() => this.props.subtract(5)}>SUBTRACT 5</button>
+                </div>
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        countState: state.count,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        increase: () => dispatch(increaseCount()),
+        decrease: () => dispatch(decreaseCount()),
+        add: (val) => dispatch(addToCount(val)),
+        subtract: (val) => dispatch(subtractFromCount(val)),
+        fetchCounter: () => dispatch(fetchCounter()),
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
