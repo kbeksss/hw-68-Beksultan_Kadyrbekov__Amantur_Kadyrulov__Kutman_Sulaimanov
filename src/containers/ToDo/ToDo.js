@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './ToDo.css';
 import {connect} from "react-redux";
-import {addToDo, deleteToDo, fetchToDos} from "../../store/action";
+import {addToDo, fetchToDos} from "../../store/action";
 import Spinner from "../../component/UI/Spinner/Spinner";
 
 class ToDo extends Component {
@@ -11,7 +11,8 @@ class ToDo extends Component {
     changeValue = (e) => {
         this.setState({inputValue: e.target.value})
     };
-    saveToDo = () => {
+    saveToDo = (e) => {
+        e.preventDefault();
         if(this.state.inputValue){
             this.props.addItem(this.state.inputValue);
             this.setState({inputValue: ''});
