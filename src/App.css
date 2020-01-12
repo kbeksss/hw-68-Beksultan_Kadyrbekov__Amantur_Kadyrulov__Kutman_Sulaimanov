@@ -1,0 +1,20 @@
+.Navigation{
+    background: #00ffff;
+}
+.Navigation .container{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 15px;
+    text-align: right;
+}
+.Navigation a{
+    color: #000;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid;
+    border-radius: 8px;
+    margin-left: 8px;
+}
+.Navigation a.active{
+    background: #00dbdb;
+}

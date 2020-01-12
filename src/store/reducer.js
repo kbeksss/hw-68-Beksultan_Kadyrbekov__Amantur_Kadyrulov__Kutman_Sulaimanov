@@ -1,5 +1,5 @@
 import {
-    ADD,
+    ADD, ADD_TO_DO,
     DECREASE,
     FETCH_COUNTER_ERROR,
     FETCH_COUNTER_REQUEST,
@@ -7,10 +7,12 @@ import {
     INCREASE,
     SUBTRACT
 } from "./action";
+import nanoid from 'nanoid';
 
 const initialState = {
     count: 4,
-    loading: false
+    loading: false,
+    todos: [{value: 'work hard', id: nanoid()},{value: 'work smart', id: nanoid()},{value: 'study hard', id: nanoid()},{value: 'study smart', id: nanoid()},],
 };
 
 const reducer = (state = initialState, action) => {
@@ -50,6 +52,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false
+            };
+        case ADD_TO_DO:
+            return {
+                ...state,
+                todos: [...state.todos, {id: nanoid(), value: action.value}],
             };
         default:
             return state;

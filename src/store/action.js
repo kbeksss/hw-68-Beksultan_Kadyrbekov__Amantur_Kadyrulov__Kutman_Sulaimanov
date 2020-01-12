@@ -56,6 +56,14 @@ export const fetchCounter = () => {
 };
 export const saveCounter = () => {
     return (dispatch, getState) => {
-        axiosCount.put('counter.json', {count: getState().count}).catch(e => console.log(e));
+        axiosCount.put('counter.json', {count: getState().count})
+            .catch(e => console.error('error happened while saving data', e));
     }
+};
+
+
+export const ADD_TO_DO = 'ADD_TO_DO';
+
+export const addToDo = value => {
+    return {type: ADD_TO_DO, value}
 };

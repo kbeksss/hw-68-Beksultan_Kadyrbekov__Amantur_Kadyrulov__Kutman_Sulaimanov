@@ -8,6 +8,7 @@ import {
     increaseCount,
     subtractFromCount
 } from "../../store/action";
+import Spinner from "../../component/UI/Spinner/Spinner";
 
 class Counter extends Component{
     componentDidMount() {
@@ -17,7 +18,7 @@ class Counter extends Component{
     render() {
         return (
             <div className='Counter'>
-                <div className='Count'>{this.props.countState}</div>
+                <div className='Count'>{this.props.loadingState ? <Spinner/> : this.props.countState}</div>
                 <div className='All-btns'>
                     <button onClick={this.props.increase}>INCREASE</button>
                     <button onClick={this.props.decrease}>DECREASE</button>
@@ -32,6 +33,7 @@ class Counter extends Component{
 const mapStateToProps = state => {
     return {
         countState: state.count,
+        loadingState: state.loading,
     }
 };
 
