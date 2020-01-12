@@ -19,15 +19,8 @@
     padding: 12px 15px;
     display: flex;
 }
-.ToDoItem p{
+.ToDoItem > p{
     margin: 0;
-}
-.delete-btn{
-    margin-left: auto;
-    border: 1px solid #000;
-    background: #009898;
-    color: #fff;
-    font-size: 18px;
 }
 .FormWrap input{
     height: 30px;
@@ -39,6 +32,7 @@
     font-size: 18px;
 }
 .FormWrap button{
+    outline: none;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 18px;

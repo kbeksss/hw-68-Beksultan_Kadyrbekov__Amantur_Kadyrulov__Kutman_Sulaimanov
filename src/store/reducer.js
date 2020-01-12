@@ -1,9 +1,9 @@
 import {
     ADD, ADD_TO_DO,
-    DECREASE,
+    DECREASE, DELETE_TO_DO, EDIT_TO_DO,
     FETCH_COUNTER_ERROR,
     FETCH_COUNTER_REQUEST,
-    FETCH_COUNTER_SUCCESS,
+    FETCH_COUNTER_SUCCESS, FETCH_TO_DOS_SUCCESS,
     INCREASE,
     SUBTRACT
 } from "./action";
@@ -12,7 +12,7 @@ import nanoid from 'nanoid';
 const initialState = {
     count: 4,
     loading: false,
-    todos: [{value: 'work hard', id: nanoid()},{value: 'work smart', id: nanoid()},{value: 'study hard', id: nanoid()},{value: 'study smart', id: nanoid()},],
+    todos: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -57,6 +57,19 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 todos: [...state.todos, {id: nanoid(), value: action.value}],
+            };
+        case DELETE_TO_DO:
+            return {
+                ...state,
+                todos: state.todos.filter(item => item.id !== action.id),
+            };
+        case FETCH_TO_DOS_SUCCESS:
+            let allToDos = Object.keys(action.allToDos).map(todoId => {
+                return {value: action.allToDos[todoId].value, id: nanoid()}
+            });
+            return {
+                ...state,
+                todos: allToDos,
             };
         default:
             return state;

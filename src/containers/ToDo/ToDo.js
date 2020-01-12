@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './ToDo.css';
 import {connect} from "react-redux";
-import {addToDo} from "../../store/action";
+import {addToDo, deleteToDo, fetchToDos} from "../../store/action";
 
 class ToDo extends Component {
     state = {
@@ -16,6 +16,9 @@ class ToDo extends Component {
             this.setState({inputValue: ''});
         }
     };
+    componentDidMount() {
+        this.props.fetchTodos();
+    }
     render() {
         return (
             <div className='ToDo'>
@@ -28,7 +31,6 @@ class ToDo extends Component {
                         {this.props.stateToDos.map(todo => (
                             <div className='ToDoItem' key={todo.id}>
                                 <p>{todo.value}</p>
-                                <button className='delete-btn'>delete</button>
                             </div>
                         ))}
                     </div>
@@ -46,7 +48,9 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        addItem: (value) => dispatch(addToDo(value)),
+        addItem: value => dispatch(addToDo(value)),
+        deleteItem: id => dispatch(deleteToDo(id)),
+        fetchTodos: () => dispatch(fetchToDos()),
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
