@@ -3,7 +3,7 @@ import {
     DECREASE, DELETE_TO_DO, EDIT_TO_DO,
     FETCH_COUNTER_ERROR,
     FETCH_COUNTER_REQUEST,
-    FETCH_COUNTER_SUCCESS, FETCH_TO_DOS_SUCCESS,
+    FETCH_COUNTER_SUCCESS, FETCH_TO_DOS_ERROR, FETCH_TO_DOS_REQUEST, FETCH_TO_DOS_SUCCESS,
     INCREASE,
     SUBTRACT
 } from "./action";
@@ -58,10 +58,10 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 todos: [...state.todos, {id: nanoid(), value: action.value}],
             };
-        case DELETE_TO_DO:
+        case FETCH_TO_DOS_REQUEST:
             return {
                 ...state,
-                todos: state.todos.filter(item => item.id !== action.id),
+                loading: true
             };
         case FETCH_TO_DOS_SUCCESS:
             let allToDos = Object.keys(action.allToDos).map(todoId => {
@@ -70,6 +70,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 todos: allToDos,
+                loading: false
+            };
+        case FETCH_TO_DOS_ERROR:
+            return {
+                ...state,
+                loading: false
             };
         default:
             return state;

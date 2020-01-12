@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './ToDo.css';
 import {connect} from "react-redux";
 import {addToDo, deleteToDo, fetchToDos} from "../../store/action";
+import Spinner from "../../component/UI/Spinner/Spinner";
 
 class ToDo extends Component {
     state = {
@@ -27,13 +28,15 @@ class ToDo extends Component {
                         <input type="text" value={this.state.inputValue} onChange={this.changeValue}/>
                         <button type='submit'>Save</button>
                     </div>
-                    <div className='ToDos'>
-                        {this.props.stateToDos.map(todo => (
-                            <div className='ToDoItem' key={todo.id}>
-                                <p>{todo.value}</p>
-                            </div>
-                        ))}
-                    </div>
+                    {this.props.loadingState ? <Spinner/> : (
+                        <div className='ToDos'>
+                            {this.props.stateToDos.map(todo => (
+                                <div className='ToDoItem' key={todo.id}>
+                                    <p>{todo.value}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </form>
             </div>
         );
@@ -44,12 +47,12 @@ class ToDo extends Component {
 const mapStateToProps = state => {
     return {
         stateToDos: state.todos,
+        loadingState: state.loading,
     }
 };
 const mapDispatchToProps = dispatch => {
     return {
         addItem: value => dispatch(addToDo(value)),
-        deleteItem: id => dispatch(deleteToDo(id)),
         fetchTodos: () => dispatch(fetchToDos()),
     }
 };
